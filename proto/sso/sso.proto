@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+package auth;
+
+option go_package = "vladimir.sso.v1;ssov1";
+
+service Auth {
+  rpc Register(RegisterRequest) returns (RegisterResponse);
+  rpc Login(LoginRequest) returns (LoginResponse);
+  // ...TBD
+}
+
+message RegisterRequest {
+  string email = 1; // Email of the user to register
+  string password = 2; // Password of the user to register
+}
+
+message RegisterResponse {
+  string user_id = 1; // UUID of user in system
+}
+
+message LoginRequest {
+  string email = 1; // Email of the user to login
+  string password = 2; // Email of the user to login
+  int32 app_id = 3; // For abstraction, for now there's only one app
+}
+
+message LoginResponse {
+  string access_token = 1; // 
+  string refresh_token = 2; // 
+}
