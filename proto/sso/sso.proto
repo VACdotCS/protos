@@ -7,7 +7,8 @@ option go_package = "vladimir.sso.v1;ssov1";
 service Auth {
   rpc Register(RegisterRequest) returns (RegisterResponse);
   rpc Login(LoginRequest) returns (LoginResponse);
-  // ...TBD
+  rpc ValidateToken(ValidateTokenRequest) returns (ValidateTokenResponse);
+  rpc RegenerateAccessToken(RegenerateAccessTokenRequest) returns (RegenerateAccessTokenResponse);
 }
 
 message RegisterRequest {
@@ -26,6 +27,22 @@ message LoginRequest {
 }
 
 message LoginResponse {
-  string access_token = 1; // 
-  string refresh_token = 2; // 
+  string access_token = 1; // JWT Token with short ttl
+  string refresh_token = 2; // JWT Token with long ttl
+}
+
+message ValidateTokenRequest {
+  string access_token = 1; // JWT Token with short ttl
+}
+
+message ValidateTokenResponse {
+  bool valid = 1; // Boolean that marks valid or invalid token for auth
+}
+
+message RegenerateAccessTokenRequest {
+  string refresh_token = 1; // JWT Token with long ttl
+}
+
+message RegenerateAccessTokenResponse {
+  string access_token = 1; // JWT Token with short ttl
 }
