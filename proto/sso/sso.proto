@@ -2,13 +2,32 @@ syntax = "proto3";
 
 package auth;
 
+import "google/api/annotations.proto";
+
 option go_package = "vladimir.sso.v1;ssov1";
 
 service Auth {
-  rpc Register(RegisterRequest) returns (RegisterResponse);
-  rpc Login(LoginRequest) returns (LoginResponse);
+  rpc Register(RegisterRequest) returns (RegisterResponse) {
+    option (google.api.http) = {
+      post: "/register"
+      body: "*"
+    };
+  }
+
+  rpc Login(LoginRequest) returns (LoginResponse) {
+    option (google.api.http) = {
+      post: "/login"
+      body: "*"
+    };
+  }
+
+  rpc RegenerateRefreshToken(RegenerateRefreshTokenRequest) returns (RegenerateRefreshTokenResponse) {
+    option (google.api.http) = {
+      post: "/refresh"
+      body: "*"
+    };
+  }
   rpc ValidateToken(ValidateTokenRequest) returns (ValidateTokenResponse);
-  rpc RegenerateRefreshToken(RegenerateRefreshTokenRequest) returns (RegenerateRefreshTokenResponse);
   rpc GetJWKS(GetJWKSRequest) returns (JWKS);
 }
 
