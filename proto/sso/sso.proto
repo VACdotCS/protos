@@ -63,4 +63,5 @@ message RegenerateRefreshTokenRequest {
 
 message RegenerateRefreshTokenResponse {
   string access_token = 1; // JWT Token with short ttl
+  string refresh_token = 2; // JWT Token with long ttl
 }
