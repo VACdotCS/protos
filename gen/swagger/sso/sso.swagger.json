@@ -1,0 +1,276 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "sso/sso.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "Auth"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/login": {
+      "post": {
+        "operationId": "Auth_Login",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/authLoginResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/authLoginRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Auth"
+        ]
+      }
+    },
+    "/refresh": {
+      "post": {
+        "operationId": "Auth_RegenerateRefreshToken",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/authRegenerateRefreshTokenResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/authRegenerateRefreshTokenRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Auth"
+        ]
+      }
+    },
+    "/register": {
+      "post": {
+        "operationId": "Auth_Register",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/authRegisterResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/authRegisterRequest"
+            }
+          }
+        ],
+        "tags": [
+          "Auth"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "authJWK": {
+      "type": "object",
+      "properties": {
+        "kid": {
+          "type": "string",
+          "title": "Key ID"
+        },
+        "kty": {
+          "type": "string",
+          "title": "Key type"
+        },
+        "alg": {
+          "type": "string",
+          "title": "Algorithm (RS256)"
+        },
+        "use": {
+          "type": "string",
+          "title": "\"sig\""
+        },
+        "n": {
+          "type": "string",
+          "title": "Modulus (Base64URL)"
+        },
+        "e": {
+          "type": "string",
+          "title": "Exponent (Base64URL)"
+        },
+        "exp": {
+          "type": "string",
+          "format": "int64",
+          "title": "Expiration unix timestamp"
+        }
+      }
+    },
+    "authJWKS": {
+      "type": "object",
+      "properties": {
+        "keys": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/authJWK"
+          }
+        }
+      }
+    },
+    "authLoginRequest": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string",
+          "title": "Email of the user to login"
+        },
+        "password": {
+          "type": "string",
+          "title": "Email of the user to login"
+        },
+        "appId": {
+          "type": "integer",
+          "format": "int32",
+          "title": "For abstraction, for now there's only one app"
+        }
+      }
+    },
+    "authLoginResponse": {
+      "type": "object",
+      "properties": {
+        "accessToken": {
+          "type": "string",
+          "title": "JWT Token with short ttl"
+        },
+        "refreshToken": {
+          "type": "string",
+          "title": "JWT Token with long ttl"
+        }
+      }
+    },
+    "authRegenerateRefreshTokenRequest": {
+      "type": "object",
+      "properties": {
+        "refreshToken": {
+          "type": "string",
+          "title": "JWT Token with long ttl"
+        }
+      }
+    },
+    "authRegenerateRefreshTokenResponse": {
+      "type": "object",
+      "properties": {
+        "accessToken": {
+          "type": "string",
+          "title": "JWT Token with short ttl"
+        },
+        "refreshToken": {
+          "type": "string",
+          "title": "JWT Token with long ttl"
+        }
+      }
+    },
+    "authRegisterRequest": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string",
+          "title": "Email of the user to register"
+        },
+        "password": {
+          "type": "string",
+          "title": "Password of the user to register"
+        }
+      }
+    },
+    "authRegisterResponse": {
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "title": "UUID of user in system"
+        }
+      }
+    },
+    "authValidateTokenResponse": {
+      "type": "object",
+      "properties": {
+        "valid": {
+          "type": "boolean",
+          "title": "Boolean that marks valid or invalid token for auth"
+        }
+      }
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    }
+  }
+}
