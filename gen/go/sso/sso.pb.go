@@ -489,27 +489,27 @@ func (x *ValidateTokenResponse) GetValid() bool {
 	return false
 }
 
-type RegenerateAccessTokenRequest struct {
+type RegenerateRefreshTokenRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	RefreshToken  string                 `protobuf:"bytes,1,opt,name=refresh_token,json=refreshToken,proto3" json:"refresh_token,omitempty"` // JWT Token with long ttl
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *RegenerateAccessTokenRequest) Reset() {
-	*x = RegenerateAccessTokenRequest{}
+func (x *RegenerateRefreshTokenRequest) Reset() {
+	*x = RegenerateRefreshTokenRequest{}
 	mi := &file_sso_sso_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *RegenerateAccessTokenRequest) String() string {
+func (x *RegenerateRefreshTokenRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*RegenerateAccessTokenRequest) ProtoMessage() {}
+func (*RegenerateRefreshTokenRequest) ProtoMessage() {}
 
-func (x *RegenerateAccessTokenRequest) ProtoReflect() protoreflect.Message {
+func (x *RegenerateRefreshTokenRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_sso_sso_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -521,39 +521,39 @@ func (x *RegenerateAccessTokenRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use RegenerateAccessTokenRequest.ProtoReflect.Descriptor instead.
-func (*RegenerateAccessTokenRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use RegenerateRefreshTokenRequest.ProtoReflect.Descriptor instead.
+func (*RegenerateRefreshTokenRequest) Descriptor() ([]byte, []int) {
 	return file_sso_sso_proto_rawDescGZIP(), []int{9}
 }
 
-func (x *RegenerateAccessTokenRequest) GetRefreshToken() string {
+func (x *RegenerateRefreshTokenRequest) GetRefreshToken() string {
 	if x != nil {
 		return x.RefreshToken
 	}
 	return ""
 }
 
-type RegenerateAccessTokenResponse struct {
+type RegenerateRefreshTokenResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	AccessToken   string                 `protobuf:"bytes,1,opt,name=access_token,json=accessToken,proto3" json:"access_token,omitempty"` // JWT Token with short ttl
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *RegenerateAccessTokenResponse) Reset() {
-	*x = RegenerateAccessTokenResponse{}
+func (x *RegenerateRefreshTokenResponse) Reset() {
+	*x = RegenerateRefreshTokenResponse{}
 	mi := &file_sso_sso_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *RegenerateAccessTokenResponse) String() string {
+func (x *RegenerateRefreshTokenResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*RegenerateAccessTokenResponse) ProtoMessage() {}
+func (*RegenerateRefreshTokenResponse) ProtoMessage() {}
 
-func (x *RegenerateAccessTokenResponse) ProtoReflect() protoreflect.Message {
+func (x *RegenerateRefreshTokenResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_sso_sso_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -565,12 +565,12 @@ func (x *RegenerateAccessTokenResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use RegenerateAccessTokenResponse.ProtoReflect.Descriptor instead.
-func (*RegenerateAccessTokenResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use RegenerateRefreshTokenResponse.ProtoReflect.Descriptor instead.
+func (*RegenerateRefreshTokenResponse) Descriptor() ([]byte, []int) {
 	return file_sso_sso_proto_rawDescGZIP(), []int{10}
 }
 
-func (x *RegenerateAccessTokenResponse) GetAccessToken() string {
+func (x *RegenerateRefreshTokenResponse) GetAccessToken() string {
 	if x != nil {
 		return x.AccessToken
 	}
@@ -608,16 +608,16 @@ const file_sso_sso_proto_rawDesc = "" +
 	"\x14ValidateTokenRequest\x12!\n" +
 	"\faccess_token\x18\x01 \x01(\tR\vaccessToken\"-\n" +
 	"\x15ValidateTokenResponse\x12\x14\n" +
-	"\x05valid\x18\x01 \x01(\bR\x05valid\"C\n" +
-	"\x1cRegenerateAccessTokenRequest\x12#\n" +
-	"\rrefresh_token\x18\x01 \x01(\tR\frefreshToken\"B\n" +
-	"\x1dRegenerateAccessTokenResponse\x12!\n" +
-	"\faccess_token\x18\x01 \x01(\tR\vaccessToken2\xcd\x02\n" +
+	"\x05valid\x18\x01 \x01(\bR\x05valid\"D\n" +
+	"\x1dRegenerateRefreshTokenRequest\x12#\n" +
+	"\rrefresh_token\x18\x01 \x01(\tR\frefreshToken\"C\n" +
+	"\x1eRegenerateRefreshTokenResponse\x12!\n" +
+	"\faccess_token\x18\x01 \x01(\tR\vaccessToken2\xcf\x02\n" +
 	"\x04Auth\x129\n" +
 	"\bRegister\x12\x15.auth.RegisterRequest\x1a\x16.auth.RegisterResponse\x120\n" +
 	"\x05Login\x12\x12.auth.LoginRequest\x1a\x13.auth.LoginResponse\x12H\n" +
-	"\rValidateToken\x12\x1a.auth.ValidateTokenRequest\x1a\x1b.auth.ValidateTokenResponse\x12a\n" +
-	"\x16RegenerateRefreshToken\x12\".auth.RegenerateAccessTokenRequest\x1a#.auth.RegenerateAccessTokenResponse\x12+\n" +
+	"\rValidateToken\x12\x1a.auth.ValidateTokenRequest\x1a\x1b.auth.ValidateTokenResponse\x12c\n" +
+	"\x16RegenerateRefreshToken\x12#.auth.RegenerateRefreshTokenRequest\x1a$.auth.RegenerateRefreshTokenResponse\x12+\n" +
 	"\aGetJWKS\x12\x14.auth.GetJWKSRequest\x1a\n" +
 	".auth.JWKSB\x17Z\x15vladimir.sso.v1;ssov1b\x06proto3"
 
@@ -635,29 +635,29 @@ func file_sso_sso_proto_rawDescGZIP() []byte {
 
 var file_sso_sso_proto_msgTypes = make([]protoimpl.MessageInfo, 11)
 var file_sso_sso_proto_goTypes = []any{
-	(*JWK)(nil),                           // 0: auth.JWK
-	(*JWKS)(nil),                          // 1: auth.JWKS
-	(*GetJWKSRequest)(nil),                // 2: auth.GetJWKSRequest
-	(*RegisterRequest)(nil),               // 3: auth.RegisterRequest
-	(*RegisterResponse)(nil),              // 4: auth.RegisterResponse
-	(*LoginRequest)(nil),                  // 5: auth.LoginRequest
-	(*LoginResponse)(nil),                 // 6: auth.LoginResponse
-	(*ValidateTokenRequest)(nil),          // 7: auth.ValidateTokenRequest
-	(*ValidateTokenResponse)(nil),         // 8: auth.ValidateTokenResponse
-	(*RegenerateAccessTokenRequest)(nil),  // 9: auth.RegenerateAccessTokenRequest
-	(*RegenerateAccessTokenResponse)(nil), // 10: auth.RegenerateAccessTokenResponse
+	(*JWK)(nil),                            // 0: auth.JWK
+	(*JWKS)(nil),                           // 1: auth.JWKS
+	(*GetJWKSRequest)(nil),                 // 2: auth.GetJWKSRequest
+	(*RegisterRequest)(nil),                // 3: auth.RegisterRequest
+	(*RegisterResponse)(nil),               // 4: auth.RegisterResponse
+	(*LoginRequest)(nil),                   // 5: auth.LoginRequest
+	(*LoginResponse)(nil),                  // 6: auth.LoginResponse
+	(*ValidateTokenRequest)(nil),           // 7: auth.ValidateTokenRequest
+	(*ValidateTokenResponse)(nil),          // 8: auth.ValidateTokenResponse
+	(*RegenerateRefreshTokenRequest)(nil),  // 9: auth.RegenerateRefreshTokenRequest
+	(*RegenerateRefreshTokenResponse)(nil), // 10: auth.RegenerateRefreshTokenResponse
 }
 var file_sso_sso_proto_depIdxs = []int32{
 	0,  // 0: auth.JWKS.keys:type_name -> auth.JWK
 	3,  // 1: auth.Auth.Register:input_type -> auth.RegisterRequest
 	5,  // 2: auth.Auth.Login:input_type -> auth.LoginRequest
 	7,  // 3: auth.Auth.ValidateToken:input_type -> auth.ValidateTokenRequest
-	9,  // 4: auth.Auth.RegenerateRefreshToken:input_type -> auth.RegenerateAccessTokenRequest
+	9,  // 4: auth.Auth.RegenerateRefreshToken:input_type -> auth.RegenerateRefreshTokenRequest
 	2,  // 5: auth.Auth.GetJWKS:input_type -> auth.GetJWKSRequest
 	4,  // 6: auth.Auth.Register:output_type -> auth.RegisterResponse
 	6,  // 7: auth.Auth.Login:output_type -> auth.LoginResponse
 	8,  // 8: auth.Auth.ValidateToken:output_type -> auth.ValidateTokenResponse
-	10, // 9: auth.Auth.RegenerateRefreshToken:output_type -> auth.RegenerateAccessTokenResponse
+	10, // 9: auth.Auth.RegenerateRefreshToken:output_type -> auth.RegenerateRefreshTokenResponse
 	1,  // 10: auth.Auth.GetJWKS:output_type -> auth.JWKS
 	6,  // [6:11] is the sub-list for method output_type
 	1,  // [1:6] is the sub-list for method input_type

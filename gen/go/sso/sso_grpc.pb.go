@@ -33,7 +33,7 @@ type AuthClient interface {
 	Register(ctx context.Context, in *RegisterRequest, opts ...grpc.CallOption) (*RegisterResponse, error)
 	Login(ctx context.Context, in *LoginRequest, opts ...grpc.CallOption) (*LoginResponse, error)
 	ValidateToken(ctx context.Context, in *ValidateTokenRequest, opts ...grpc.CallOption) (*ValidateTokenResponse, error)
-	RegenerateRefreshToken(ctx context.Context, in *RegenerateAccessTokenRequest, opts ...grpc.CallOption) (*RegenerateAccessTokenResponse, error)
+	RegenerateRefreshToken(ctx context.Context, in *RegenerateRefreshTokenRequest, opts ...grpc.CallOption) (*RegenerateRefreshTokenResponse, error)
 	GetJWKS(ctx context.Context, in *GetJWKSRequest, opts ...grpc.CallOption) (*JWKS, error)
 }
 
@@ -75,9 +75,9 @@ func (c *authClient) ValidateToken(ctx context.Context, in *ValidateTokenRequest
 	return out, nil
 }
 
-func (c *authClient) RegenerateRefreshToken(ctx context.Context, in *RegenerateAccessTokenRequest, opts ...grpc.CallOption) (*RegenerateAccessTokenResponse, error) {
+func (c *authClient) RegenerateRefreshToken(ctx context.Context, in *RegenerateRefreshTokenRequest, opts ...grpc.CallOption) (*RegenerateRefreshTokenResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(RegenerateAccessTokenResponse)
+	out := new(RegenerateRefreshTokenResponse)
 	err := c.cc.Invoke(ctx, Auth_RegenerateRefreshToken_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -102,7 +102,7 @@ type AuthServer interface {
 	Register(context.Context, *RegisterRequest) (*RegisterResponse, error)
 	Login(context.Context, *LoginRequest) (*LoginResponse, error)
 	ValidateToken(context.Context, *ValidateTokenRequest) (*ValidateTokenResponse, error)
-	RegenerateRefreshToken(context.Context, *RegenerateAccessTokenRequest) (*RegenerateAccessTokenResponse, error)
+	RegenerateRefreshToken(context.Context, *RegenerateRefreshTokenRequest) (*RegenerateRefreshTokenResponse, error)
 	GetJWKS(context.Context, *GetJWKSRequest) (*JWKS, error)
 	mustEmbedUnimplementedAuthServer()
 }
@@ -123,7 +123,7 @@ func (UnimplementedAuthServer) Login(context.Context, *LoginRequest) (*LoginResp
 func (UnimplementedAuthServer) ValidateToken(context.Context, *ValidateTokenRequest) (*ValidateTokenResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ValidateToken not implemented")
 }
-func (UnimplementedAuthServer) RegenerateRefreshToken(context.Context, *RegenerateAccessTokenRequest) (*RegenerateAccessTokenResponse, error) {
+func (UnimplementedAuthServer) RegenerateRefreshToken(context.Context, *RegenerateRefreshTokenRequest) (*RegenerateRefreshTokenResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method RegenerateRefreshToken not implemented")
 }
 func (UnimplementedAuthServer) GetJWKS(context.Context, *GetJWKSRequest) (*JWKS, error) {
@@ -205,7 +205,7 @@ func _Auth_ValidateToken_Handler(srv interface{}, ctx context.Context, dec func(
 }
 
 func _Auth_RegenerateRefreshToken_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(RegenerateAccessTokenRequest)
+	in := new(RegenerateRefreshTokenRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -217,7 +217,7 @@ func _Auth_RegenerateRefreshToken_Handler(srv interface{}, ctx context.Context, 
 		FullMethod: Auth_RegenerateRefreshToken_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AuthServer).RegenerateRefreshToken(ctx, req.(*RegenerateAccessTokenRequest))
+		return srv.(AuthServer).RegenerateRefreshToken(ctx, req.(*RegenerateRefreshTokenRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }

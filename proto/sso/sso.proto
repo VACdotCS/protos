@@ -8,7 +8,7 @@ service Auth {
   rpc Register(RegisterRequest) returns (RegisterResponse);
   rpc Login(LoginRequest) returns (LoginResponse);
   rpc ValidateToken(ValidateTokenRequest) returns (ValidateTokenResponse);
-  rpc RegenerateRefreshToken(RegenerateAccessTokenRequest) returns (RegenerateAccessTokenResponse);
+  rpc RegenerateRefreshToken(RegenerateRefreshTokenRequest) returns (RegenerateRefreshTokenResponse);
   rpc GetJWKS(GetJWKSRequest) returns (JWKS);
 }
 
@@ -57,10 +57,10 @@ message ValidateTokenResponse {
   bool valid = 1; // Boolean that marks valid or invalid token for auth
 }
 
-message RegenerateAccessTokenRequest {
+message RegenerateRefreshTokenRequest {
   string refresh_token = 1; // JWT Token with long ttl
 }
 
-message RegenerateAccessTokenResponse {
+message RegenerateRefreshTokenResponse {
   string access_token = 1; // JWT Token with short ttl
 }
