@@ -25,7 +25,9 @@ message JWKS {
   repeated JWK keys = 1;
 }
 
-message GetJWKSRequest {}
+message GetJWKSRequest {
+  string kid = 1; // id of the key, can be empty
+}
 
 message RegisterRequest {
   string email = 1; // Email of the user to register

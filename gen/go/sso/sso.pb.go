@@ -24,8 +24,8 @@ const (
 type JWK struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Kid           string                 `protobuf:"bytes,1,opt,name=kid,proto3" json:"kid,omitempty"` // Key ID
-	Kty           string                 `protobuf:"bytes,2,opt,name=kty,proto3" json:"kty,omitempty"` // Тип ключа (например "RSA")
-	Alg           string                 `protobuf:"bytes,3,opt,name=alg,proto3" json:"alg,omitempty"` // Алгоритм (RS256)
+	Kty           string                 `protobuf:"bytes,2,opt,name=kty,proto3" json:"kty,omitempty"` // Key type
+	Alg           string                 `protobuf:"bytes,3,opt,name=alg,proto3" json:"alg,omitempty"` // Algorithm (RS256)
 	Use           string                 `protobuf:"bytes,4,opt,name=use,proto3" json:"use,omitempty"` // "sig"
 	N             string                 `protobuf:"bytes,5,opt,name=n,proto3" json:"n,omitempty"`     // Modulus (Base64URL)
 	E             string                 `protobuf:"bytes,6,opt,name=e,proto3" json:"e,omitempty"`     // Exponent (Base64URL)
@@ -151,6 +151,7 @@ func (x *JWKS) GetKeys() []*JWK {
 
 type GetJWKSRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
+	Kid           string                 `protobuf:"bytes,1,opt,name=kid,proto3" json:"kid,omitempty"` // id of the key, can be empty
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -183,6 +184,13 @@ func (x *GetJWKSRequest) ProtoReflect() protoreflect.Message {
 // Deprecated: Use GetJWKSRequest.ProtoReflect.Descriptor instead.
 func (*GetJWKSRequest) Descriptor() ([]byte, []int) {
 	return file_sso_sso_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *GetJWKSRequest) GetKid() string {
+	if x != nil {
+		return x.Kid
+	}
+	return ""
 }
 
 type RegisterRequest struct {
@@ -582,8 +590,9 @@ const file_sso_sso_proto_rawDesc = "" +
 	"\x01n\x18\x05 \x01(\tR\x01n\x12\f\n" +
 	"\x01e\x18\x06 \x01(\tR\x01e\"%\n" +
 	"\x04JWKS\x12\x1d\n" +
-	"\x04keys\x18\x01 \x03(\v2\t.auth.JWKR\x04keys\"\x10\n" +
-	"\x0eGetJWKSRequest\"C\n" +
+	"\x04keys\x18\x01 \x03(\v2\t.auth.JWKR\x04keys\"\"\n" +
+	"\x0eGetJWKSRequest\x12\x10\n" +
+	"\x03kid\x18\x01 \x01(\tR\x03kid\"C\n" +
 	"\x0fRegisterRequest\x12\x14\n" +
 	"\x05email\x18\x01 \x01(\tR\x05email\x12\x1a\n" +
 	"\bpassword\x18\x02 \x01(\tR\bpassword\"+\n" +
