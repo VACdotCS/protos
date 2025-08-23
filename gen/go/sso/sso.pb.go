@@ -612,12 +612,12 @@ const file_sso_sso_proto_rawDesc = "" +
 	"\x1cRegenerateAccessTokenRequest\x12#\n" +
 	"\rrefresh_token\x18\x01 \x01(\tR\frefreshToken\"B\n" +
 	"\x1dRegenerateAccessTokenResponse\x12!\n" +
-	"\faccess_token\x18\x01 \x01(\tR\vaccessToken2\xcc\x02\n" +
+	"\faccess_token\x18\x01 \x01(\tR\vaccessToken2\xcd\x02\n" +
 	"\x04Auth\x129\n" +
 	"\bRegister\x12\x15.auth.RegisterRequest\x1a\x16.auth.RegisterResponse\x120\n" +
 	"\x05Login\x12\x12.auth.LoginRequest\x1a\x13.auth.LoginResponse\x12H\n" +
-	"\rValidateToken\x12\x1a.auth.ValidateTokenRequest\x1a\x1b.auth.ValidateTokenResponse\x12`\n" +
-	"\x15RegenerateAccessToken\x12\".auth.RegenerateAccessTokenRequest\x1a#.auth.RegenerateAccessTokenResponse\x12+\n" +
+	"\rValidateToken\x12\x1a.auth.ValidateTokenRequest\x1a\x1b.auth.ValidateTokenResponse\x12a\n" +
+	"\x16RegenerateRefreshToken\x12\".auth.RegenerateAccessTokenRequest\x1a#.auth.RegenerateAccessTokenResponse\x12+\n" +
 	"\aGetJWKS\x12\x14.auth.GetJWKSRequest\x1a\n" +
 	".auth.JWKSB\x17Z\x15vladimir.sso.v1;ssov1b\x06proto3"
 
@@ -652,12 +652,12 @@ var file_sso_sso_proto_depIdxs = []int32{
 	3,  // 1: auth.Auth.Register:input_type -> auth.RegisterRequest
 	5,  // 2: auth.Auth.Login:input_type -> auth.LoginRequest
 	7,  // 3: auth.Auth.ValidateToken:input_type -> auth.ValidateTokenRequest
-	9,  // 4: auth.Auth.RegenerateAccessToken:input_type -> auth.RegenerateAccessTokenRequest
+	9,  // 4: auth.Auth.RegenerateRefreshToken:input_type -> auth.RegenerateAccessTokenRequest
 	2,  // 5: auth.Auth.GetJWKS:input_type -> auth.GetJWKSRequest
 	4,  // 6: auth.Auth.Register:output_type -> auth.RegisterResponse
 	6,  // 7: auth.Auth.Login:output_type -> auth.LoginResponse
 	8,  // 8: auth.Auth.ValidateToken:output_type -> auth.ValidateTokenResponse
-	10, // 9: auth.Auth.RegenerateAccessToken:output_type -> auth.RegenerateAccessTokenResponse
+	10, // 9: auth.Auth.RegenerateRefreshToken:output_type -> auth.RegenerateAccessTokenResponse
 	1,  // 10: auth.Auth.GetJWKS:output_type -> auth.JWKS
 	6,  // [6:11] is the sub-list for method output_type
 	1,  // [1:6] is the sub-list for method input_type

@@ -8,7 +8,7 @@ service Auth {
   rpc Register(RegisterRequest) returns (RegisterResponse);
   rpc Login(LoginRequest) returns (LoginResponse);
   rpc ValidateToken(ValidateTokenRequest) returns (ValidateTokenResponse);
-  rpc RegenerateAccessToken(RegenerateAccessTokenRequest) returns (RegenerateAccessTokenResponse);
+  rpc RegenerateRefreshToken(RegenerateAccessTokenRequest) returns (RegenerateAccessTokenResponse);
   rpc GetJWKS(GetJWKSRequest) returns (JWKS);
 }
 
