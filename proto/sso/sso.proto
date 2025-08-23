@@ -19,6 +19,7 @@ message JWK {
   string use = 4;          // "sig"
   string n = 5;            // Modulus (Base64URL)
   string e = 6;            // Exponent (Base64URL)
+  int64 exp = 7;           // Expiration unix timestamp 
 }
 
 message JWKS {

@@ -23,12 +23,13 @@ const (
 
 type JWK struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Kid           string                 `protobuf:"bytes,1,opt,name=kid,proto3" json:"kid,omitempty"` // Key ID
-	Kty           string                 `protobuf:"bytes,2,opt,name=kty,proto3" json:"kty,omitempty"` // Key type
-	Alg           string                 `protobuf:"bytes,3,opt,name=alg,proto3" json:"alg,omitempty"` // Algorithm (RS256)
-	Use           string                 `protobuf:"bytes,4,opt,name=use,proto3" json:"use,omitempty"` // "sig"
-	N             string                 `protobuf:"bytes,5,opt,name=n,proto3" json:"n,omitempty"`     // Modulus (Base64URL)
-	E             string                 `protobuf:"bytes,6,opt,name=e,proto3" json:"e,omitempty"`     // Exponent (Base64URL)
+	Kid           string                 `protobuf:"bytes,1,opt,name=kid,proto3" json:"kid,omitempty"`  // Key ID
+	Kty           string                 `protobuf:"bytes,2,opt,name=kty,proto3" json:"kty,omitempty"`  // Key type
+	Alg           string                 `protobuf:"bytes,3,opt,name=alg,proto3" json:"alg,omitempty"`  // Algorithm (RS256)
+	Use           string                 `protobuf:"bytes,4,opt,name=use,proto3" json:"use,omitempty"`  // "sig"
+	N             string                 `protobuf:"bytes,5,opt,name=n,proto3" json:"n,omitempty"`      // Modulus (Base64URL)
+	E             string                 `protobuf:"bytes,6,opt,name=e,proto3" json:"e,omitempty"`      // Exponent (Base64URL)
+	Exp           int64                  `protobuf:"varint,7,opt,name=exp,proto3" json:"exp,omitempty"` // Expiration unix timestamp
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -103,6 +104,13 @@ func (x *JWK) GetE() string {
 		return x.E
 	}
 	return ""
+}
+
+func (x *JWK) GetExp() int64 {
+	if x != nil {
+		return x.Exp
+	}
+	return 0
 }
 
 type JWKS struct {
@@ -589,14 +597,15 @@ var File_sso_sso_proto protoreflect.FileDescriptor
 
 const file_sso_sso_proto_rawDesc = "" +
 	"\n" +
-	"\rsso/sso.proto\x12\x04auth\"i\n" +
+	"\rsso/sso.proto\x12\x04auth\"{\n" +
 	"\x03JWK\x12\x10\n" +
 	"\x03kid\x18\x01 \x01(\tR\x03kid\x12\x10\n" +
 	"\x03kty\x18\x02 \x01(\tR\x03kty\x12\x10\n" +
 	"\x03alg\x18\x03 \x01(\tR\x03alg\x12\x10\n" +
 	"\x03use\x18\x04 \x01(\tR\x03use\x12\f\n" +
 	"\x01n\x18\x05 \x01(\tR\x01n\x12\f\n" +
-	"\x01e\x18\x06 \x01(\tR\x01e\"%\n" +
+	"\x01e\x18\x06 \x01(\tR\x01e\x12\x10\n" +
+	"\x03exp\x18\a \x01(\x03R\x03exp\"%\n" +
 	"\x04JWKS\x12\x1d\n" +
 	"\x04keys\x18\x01 \x03(\v2\t.auth.JWKR\x04keys\"\"\n" +
 	"\x0eGetJWKSRequest\x12\x10\n" +
